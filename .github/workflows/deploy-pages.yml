@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+# main に変更が入ったら、静的ファイルをそのまま GitHub Pages へ公開する。
+# このアプリはビルド不要(バニラ HTML/CSS/JS)なので、リポジトリの中身を丸ごとアップロードする。
+
+on:
+  push:
+    branches: [main]
+  # 手動実行も可能にしておく(Actions タブから Run workflow)
+  workflow_dispatch:
+
+# Pages へのデプロイに必要な権限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時に複数デプロイが走らないようにする(最新を優先)
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # リポジトリ全体を公開対象にする(index.html がルートにあるため)
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

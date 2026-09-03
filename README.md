@@ -16,9 +16,26 @@
 - **オフライン対応**: Service Worker により、ネットがなくても起動・操作できます。
 - **依存ゼロ**: フレームワークやビルド不要のバニラ HTML / CSS / JavaScript。`index.html` を開くだけで動きます。
 
+## 公開(GitHub Pages)
+
+このリポジトリには GitHub Pages への自動デプロイ設定(`.github/workflows/deploy-pages.yml`)が入っています。
+初回のみ、以下の設定が必要です:
+
+1. GitHub のリポジトリ **Settings → Pages** を開く
+2. **Build and deployment → Source** を **「GitHub Actions」** に変更
+3. `main` ブランチにマージ(または push)すると自動でデプロイされます
+
+公開URLは次の形になります:
+
+```
+https://ryuya-matsubara.github.io/personal-assistant/
+```
+
+デプロイの進捗はリポジトリの **Actions** タブで確認できます。
+
 ## iPhone での使い方(ホーム画面に追加)
 
-1. このアプリを Web サーバー上に配置し(例: GitHub Pages)、iPhone の **Safari** で開きます。
+1. 上記の公開URLを iPhone の **Safari** で開きます。
 2. 共有ボタン → **「ホーム画面に追加」** をタップ。
 3. ホーム画面のアイコンから、通常のアプリのように起動できます。
 
