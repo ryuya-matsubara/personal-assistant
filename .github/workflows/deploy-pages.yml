@@ -32,6 +32,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          # Pages が未設定でもワークフロー側で自動的に有効化する(順序問題の回避)
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
